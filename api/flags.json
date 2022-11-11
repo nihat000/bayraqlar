@@ -1,0 +1,44 @@
+[
+   {
+      "name": "Australia",
+      "code": "AU",
+      "flag": {
+         "w80": "https://flagcdn.com/w80/au.png"
+      }
+   },
+   {
+      "name": "Azerbaijan",
+      "code": "AZ",
+      "flag": {
+         "w80": "https://flagcdn.com/w80/az.png"
+      }
+   },
+   {
+      "name": "Bangladesh",
+      "code": "BD",
+      "flag": {
+         "w80": "https://flagcdn.com/w80/az.png"
+      }
+   },
+   {
+      "name": "Germany",
+      "code": "GE",
+      "flag": {
+         "w80": "https://flagcdn.com/w80/ge.png"
+      }
+   },
+   {
+      "name": "Russia",
+      "code": "RU",
+      "flag": {
+         "w80": "https://flagcdn.com/w80/ru.png"
+      }
+   },
+   {
+      "name": "United States of America",
+      "code": "US",
+      "flag": {
+         "w80": "https://flagcdn.com/w80/us.png"
+      }
+   }
+]

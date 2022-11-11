@@ -1,0 +1,21 @@
+html{
+   color : #000;
+   text-align: center;
+}
+
+body {
+   /* background-color: #010101; */
+}
+
+#game .container {
+   max-width: 800px;
+   
+   margin : 0 auto;
+   margin-top:  5rem;
+   border : 2px solid #aaa;
+   padding : 2rem 2.5rem;
+}
+
+#game img {
+   width: 200px;
+}
