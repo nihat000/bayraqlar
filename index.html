@@ -13,13 +13,41 @@
 <body>
    <div id="game">
       <div class="container">
-         <div class="question">
-            <div class="flag-wrap">
-               <img src="" alt="" class="flag">
-            </div>
-            <div class="variants">
+         <div class="screen start-screen-wrap">
+            <div class="start-screen ">
+               <div class="select-region">
+                  <h3 class="text-center"> Choose Region </h3>
+                  <input type="checkbox" name="region" id="" value="Europe" checked>Europe
+                  <input type="checkbox" name="region" id="" value="Asia">Asia
+                  <input type="checkbox" name="region" id="" value="Africa">Africa
+                  <input type="checkbox" name="region" id="" value="Americas"> Americas
+                  <input type="checkbox" name="region" id="" value="Oceania"> Oceania
+
+               </div>
+               <button onclick="startGame()"> Find country name by flag (Timer mode) </button>
+               <button> Find country name by flag (10 Question ) </button>
 
             </div>
+
+         </div>
+         <div class="screen result-screen">
+            <img src="" alt="">
+         </div>
+         <div class="screen question screen-question">
+            <header>
+               <div class="timer">
+                  <span> 60 seconds </span>
+               </div>
+               <div class="flag-wrap">
+                  <img id="flag" class="" src="" alt="" srcset="">
+               </div>
+               <div class="correct-answer-count">
+                  <span> 0 Answer </span>
+               </div>
+            </header>
+            <section class="variants">
+
+            </section>
          </div>
       </div>
    </div>
