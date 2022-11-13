@@ -1,8 +1,29 @@
 "use strict";
 const Game = {
+   freeze: false,
    settings: {
       region: ['Europe'],
-      mode: 'Timer',
+      timerId: 0,
+      timer: 0,
+      mode: [{
+         type: "timer",
+         name: "timer-60",
+         timeLimit: 60
+      }, {
+         type: "timer",
+         name: 'timer-30',
+         timeLimit: 30,
+      }, {
+         name: "millionarie",
+         type: 'millionarie',
+         qTimeLimit: 30,
+         hint: ['joker', '50-50', 'call']
+      }, {
+         type: 'learn',
+      }, {
+
+      }
+      ]
    },
    correctAnswer: 0,
    wrongAnswer: 0,
@@ -21,11 +42,11 @@ const Game = {
    }
 }
 
-let timer = 60;
+
 let correctAnswerEl = document.querySelector(".question .correct-answer-count span")
 let timerEl = document.querySelector(".question .timer span");
 
-fetch('./api/all.json').then(res => res.json()).then(data => { Game.data = data; main() })
+fetch('./api/all.json').then(res => res.json()).then(data => { Game.data = data; })
 
 function getCountry() {
    while (true) {
@@ -64,13 +85,11 @@ function getQuestion() {
 
 }
 
-function main() {
-   getQuestion();
-   // startGame();
-}
 
 
-function startGame() {
+
+function startGame(index = 0,) {
+
    let region = [];
    document.getElementsByName('region').forEach(r => {
       if (r.checked) {
@@ -78,6 +97,7 @@ function startGame() {
       }
    })
    if (region.length == 0) {
+      alert("Please choose at least one region")
       return false;
    }
    Game.settings.region = region;
@@ -88,23 +108,73 @@ function startGame() {
    getQuestion();
    document.querySelector('.screen-question').style.display = 'block';
 
-   let timerId = setInterval(() => {
-      if (timer > 0) {
-         timerEl.innerText = timer + " seconds"
-         timer--;
-      } else {
-         clearInterval(timerId);
-      }
 
-   }, 1000);
+
+   if (Game.settings.mode[index].timeLimit > 0) {
+      Game.settings.timer = Game.settings.mode[index].timeLimit
+      Game.settings.timerId = setInterval(() => {
+         if (Game.settings.timer > 0) {
+            timerEl.innerText = Game.settings.timer + " seconds"
+            Game.settings.timer--;
+         } else {
+            clearInterval(Game.settings.timerId);
+         }
+
+      }, 1000);
+   }
+
 
 }
 
 function nextQuestion() {
-   if (this.dataset.name == Game.question.answer.name.common) {
-      Game.correctAnswer++;
-      correctAnswerEl.innerText = Game.correctAnswer + " correct";
+   let this_ = this;
+   if (Game.freeze) {
+      return false;
    }
-   getQuestion();
+
+   Game.freeze = true;
+   let i = 1;
+   let j = true;
+   this_.classList.toggle('bg-9');
+   let freezeId = setInterval(() => {
+      if (i == 8) {
+         clearInterval(freezeId)
+         reveal();
+      }
+      if (j) {
+         this.style.opacity = 0.5
+      } else {
+         this.style.opacity = 1
+      }
+      j = !j
+      i++;
+
+   }, 150)
+   function reveal() {
+      // console.log(this_);
+      if (this_.dataset.name == Game.question.answer.name.common) {
+         this_.classList.add('bg-correct')
+         Game.correctAnswer++;
+         correctAnswerEl.innerText = Game.correctAnswer + " correct";
+
+         let startPoint = 80
+         let endPoint = 30
+
+         document.querySelector('.plus-1').style.display = "block";
+         let timerX = setInterval(() => {
+            document.querySelector('.plus-1').style.top = startPoint + "px"
+            startPoint -= 3
+            if (startPoint < endPoint) {
+               document.querySelector('.plus-1').style.display = "none";
+               clearInterval(timerX)
+            }
+         }, 30)
+
+
+      } else {
+         this_.classList.add('bg-wrong');
+      }
+      setTimeout(() => { Game.freeze = false; getQuestion() }, 300)
+   }
 
 }

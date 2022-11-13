@@ -24,8 +24,10 @@
                   <input type="checkbox" name="region" id="" value="Oceania"> Oceania
 
                </div>
-               <button onclick="startGame()"> Find country name by flag (Timer mode) </button>
-               <button> Find country name by flag (10 Question ) </button>
+               <button onclick="startGame(0)"> Find country name by flag (60 Seconds) </button>
+               <button onclick="startGame(1)"> Find country name by flag (30 Seconds ) </button>
+               <button onclick="startGame(2)"> Find country name by flag ( Millionarie) </button>
+               <button onclick="startGame(3)"> Find country name by flag ( Learn ) </button>
 
             </div>
 
@@ -42,7 +44,8 @@
                   <img id="flag" class="" src="" alt="" srcset="">
                </div>
                <div class="correct-answer-count">
-                  <span> 0 Answer </span>
+                  <span> 0 Correct </span>
+                  <span class="plus-1"> +1 </span>
                </div>
             </header>
             <section class="variants">
