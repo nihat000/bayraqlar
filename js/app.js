@@ -78,6 +78,7 @@ function getQuestion() {
    }
 
    // console.log(Game.question.answer.name.common, Game.question.variants);
+   // empty
 
 }
 
