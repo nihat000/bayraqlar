@@ -135,7 +135,7 @@ function startGame() {
 }
 
 
-}
+
 
 function nextQuestion() {
    let this_ = this;
