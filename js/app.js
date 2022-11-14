@@ -77,7 +77,7 @@ function getQuestion() {
       document.querySelector('.variants').append(btn);
    }
 
-   console.log(Game.question.answer.name.common, Game.question.variants);
+   // console.log(Game.question.answer.name.common, Game.question.variants);
 
 }
 
