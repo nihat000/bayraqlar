@@ -65,7 +65,7 @@ function getQuestion() {
    for (let i = 0; i < Game.settings.variants.count - 1; i++) {
       Game.question.variants.push(getCountry());
    }
-   Game.question.variants.splice(Math.round(Math.random(Game.question.variants.count + 1)), 0, Game.question.answer);
+   Game.question.variants.splice(Math.round(Math.random(Game.question.variants.length + 1)), 0, Game.question.answer);
 
 
    for (let i = 0; i < Game.question.variants.length; i++) {
@@ -77,7 +77,7 @@ function getQuestion() {
       document.querySelector('.variants').append(btn);
    }
 
-   // console.log(Game.question.answer.name.common, Game.question.variants);
+   console.log(Game.question.answer.name.common, Game.question.variants);
 
 }
 
@@ -118,6 +118,21 @@ function startGame() {
 
       }, 1000);
    }
+
+   else if (selectedMode == 1) {
+      Game.settings.timer = document.querySelector("#range").value;
+      Game.settings.timerId = setInterval(() => {
+         if (Game.settings.timer > 0) {
+            timerEl.innerText = Game.settings.timer + " seconds"
+            Game.settings.timer--;
+         } else {
+            clearInterval(Game.settings.timerId);
+            finishGame();
+         }
+
+      }, 1000);
+   }
+}
 
 
 }
