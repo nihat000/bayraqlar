@@ -6,53 +6,89 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title> Bayraqlar </title>
-   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="css/special.css">
+   <link rel="stylesheet" href="css/style.css">
    <script src="js/app.js" defer></script>
 </head>
 
 <body>
-   <div id="game">
-      <div class="container">
-         <div class="screen start-screen-wrap">
-            <div class="start-screen ">
-               <div class="select-region">
-                  <h3 class="text-center"> Choose Region </h3>
-                  <input type="checkbox" name="region" id="" value="Europe" checked>Europe
-                  <input type="checkbox" name="region" id="" value="Asia">Asia
-                  <input type="checkbox" name="region" id="" value="Africa">Africa
-                  <input type="checkbox" name="region" id="" value="Americas"> Americas
-                  <input type="checkbox" name="region" id="" value="Oceania"> Oceania
+   <div class="container-fluid">
+      <div class="start-screen screen">
+         <h2 class="title text-center"> Menu </h2>
+         <div class="container">
 
-               </div>
-               <button onclick="startGame(0)"> Find country name by flag (60 Seconds) </button>
-               <button onclick="startGame(1)"> Find country name by flag (30 Seconds ) </button>
-               <button onclick="startGame(2)"> Find country name by flag ( Millionarie) </button>
-               <button onclick="startGame(3)"> Find country name by flag ( Learn ) </button>
+            <div class="select-region text-center mt-1">
+
+               <input type="checkbox" name="region" id="" value="Europe" checked>Europe
+               <input type="checkbox" name="region" id="" value="Asia">Asia
+               <input type="checkbox" name="region" id="" value="Africa">Africa
+               <input type="checkbox" name="region" id="" value="Americas"> Americas
+               <input type="checkbox" name="region" id="" value="Oceania"> Oceania
 
             </div>
+            <div class="select-mode text-center mt-2">
+               <div class="mode selected-mode" data-id="0" onclick="selectMode(0,this)">
+                  <h3 class="title"> Variants </h3>
+                  <img src="img/clock-flat.png" alt="">
+                  <p> You should choose correct answer from variants </p>
+               </div>
+               <div class="mode" data-id="1" onclick="selectMode(1,this)">
+                  <h3 class="title"> Input </h3>
+                  <img src="img/input.png" alt="">
+                  <p> You should write exact name of country to input </p>
+               </div>
+               <div class="mode" data-id="2" onclick="selectMode(2,this)">
+                  <h3 class="title"> Millionarie </h3>
+                  <img src="img/millionarie.png" alt="">
+                  <p> Not Availiable </p>
+               </div>
+            </div>
 
-         </div>
-         <div class="screen result-screen">
-            <img src="" alt="">
-         </div>
-         <div class="screen question screen-question">
-            <header>
-               <div class="timer">
-                  <span> 60 seconds </span>
-               </div>
-               <div class="flag-wrap">
-                  <img id="flag" class="" src="" alt="" srcset="">
-               </div>
-               <div class="correct-answer-count">
-                  <span> 0 Correct </span>
-                  <span class="plus-1"> +1 </span>
-               </div>
-            </header>
-            <section class="variants">
 
-            </section>
+            <div class="select-duration text-center mt-2 ">
+               <input id="range" class="w-80" type="range" name="" id="" min="5" max="60" step="1" value="60"
+                  onmousemove="changeDuration()">
+               <h3 class="duration mt-1" id="duration"> 60 Seconds </h3>
+            </div>
+            <div class="actions text-center mt-1">
+               <img src=" img/btn-play.png" alt="" onclick="startGame(0)">
+               <img src="img/btn-restart.png" alt="" onclick="startGame(1)">
+            </div>
          </div>
       </div>
+
+      <div class="question-screen screen">
+         <div class="container">
+            <div class="d-flex head">
+               <div class="timer">
+                  <span id="timer"> </span>
+               </div>
+               <div class="flag-wrap">
+                  <img src="" alt="" id="flag">
+               </div>
+               <div class="score">
+                  <span class="point"> 0 point </span>
+                  <span class="plus-1"> +1 </span>
+               </div>
+            </div>
+            <div class="variants">
+
+            </div>
+         </div>
+      </div>
+
+      <div class="result-screen screen">
+         <h2 class="text-center"> Result </h2>
+         <img id="close" src="img/btn-close.png" alt="" onclick="closeResult()">
+         <div class="container">
+            <p class="b"> </p>
+            <p class="mt-2 bb"></p>
+            <p class="mt-2 bbb"></p>
+            <p class="mt-2"> Not so bad, but you should improve yourself </p>
+         </div>
+      </div>
+
+
    </div>
 
 </body>

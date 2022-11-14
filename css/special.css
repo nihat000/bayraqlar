@@ -1,0 +1,59 @@
+*{box-sizing: border-box; margin:0;padding : 0;}
+button {border: none; cursor: pointer;}
+a{text-decoration: none;}
+button {border-radius: 6px;}
+button:hover{opacity: .8; }
+
+
+
+
+html {
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.text-center {text-align: center;}
+.d-flex {display: flex;}
+.justify-content-between {justify-content: space-between;}
+.justify-content-around { justify-content: space-around; }
+.flex-column {flex-direction: column;}
+.flex-row { flex-direction: row;}
+.bg-correct { background-color: #90c29c !important;}
+.bg-wrong {background-color: #dc3545 !important;}
+.bg-9 {background-color:  #256D85 !important;}
+
+.w-100 {width: 100% !important;} 
+.w-80 {width: 80%  !important;}
+.w-75 {width: 75% !important;}
+.w-60 {width: 60% !important;}
+.w-50 {width: 505 !important;}
+.w-25 {width: 25% !important;}
+
+.w-1200 {width: 1200px !important;}
+.w-1000 {width: 1000px !important;}
+.m-auto {margin: auto !important}
+
+
+.fs-44 {font-size: 44px !important}
+.fs-36 {font-size: 36px !important}
+.fs-32 {font-size: 32px !important}
+.fs-28 {font-size: 28px !important}
+.fs-24 {font-size: 24px !important}
+.fs-20 {font-size: 20px !important}
+.fs-16 {font-size: 16px !important}
+.fs-12 {font-size: 12px !important;}
+
+
+.mt-1 { margin-top: 1rem !important}
+.mt-2 {margin-top:2rem !important;}
+.mt-3 {margin-top: 3rem !important;}
+.mt-4{margin-top: 4rem !important;}
+.mt-5 {margin-top: 5rem  !important;}
+.mt-6{margin-top: 6rem !important;}
+
+
+.mb-1 {margin-bottom: 1rem !important;}
+.m-2 {margin-bottom: 2rem !important;}
+.mb-3 {margin-bottom: 3rem !important;}
+.mb-4 {margin-bottom: 4rem !important;}
+.mb-5 {margin-bottom: 5rem !important;}
+.mb-6 {margin-bottom: 6rem !important;}

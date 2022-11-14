@@ -1,38 +1,20 @@
 "use strict";
 const Game = {
    freeze: false,
+   correctAnswer: 0,
+   wrongAnswer: 0,
    settings: {
       region: ['Europe'],
       timerId: 0,
       timer: 0,
-      mode: [{
-         type: "timer",
-         name: "timer-60",
-         timeLimit: 60
-      }, {
-         type: "timer",
-         name: 'timer-30',
-         timeLimit: 30,
-      }, {
-         name: "millionarie",
-         type: 'millionarie',
-         qTimeLimit: 30,
-         hint: ['joker', '50-50', 'call']
-      }, {
-         type: 'learn',
-      }, {
-
-      }
-      ]
-   },
-   correctAnswer: 0,
-   wrongAnswer: 0,
-   variants: {
-      count: 4,
-      initials: {
-         standart: ['A)', 'B)', 'C)', 'D)']
-
-      }
+      timerId_: 0,
+      timer_: 0,
+      variants: {
+         count: 6,
+         initials: {
+            standart: ['A)', 'B)', 'C)', 'D)', 'E)', 'F)']
+         }
+      },
    },
    data: null,
    question: {
@@ -43,15 +25,29 @@ const Game = {
 }
 
 
-let correctAnswerEl = document.querySelector(".question .correct-answer-count span")
-let timerEl = document.querySelector(".question .timer span");
+let scoreEl = document.querySelector(".question-screen .score .point")
+let timerEl = document.querySelector(".question-screen .timer span");
+let selectedMode = 0;
 
 fetch('./api/all.json').then(res => res.json()).then(data => { Game.data = data; })
+
+function selectMode(id, th) {
+   selectedMode = id;
+   document.querySelectorAll('.mode').forEach(x => x.classList.remove('selected-mode'))
+   th.classList.add('selected-mode')
+}
+
+
+function changeDuration() {
+   document.querySelector('#duration').innerHTML = document.querySelector('#range').value + " seconds"
+}
+
+
 
 function getCountry() {
    while (true) {
       let z = Game.data[Math.floor(Math.random() * Game.data.length)];
-      for (let i = 0; i < Game.settings.mode.length; i++) {
+      for (let i = 0; i < Game.settings.region.length; i++) {
          if (z.region == Game.settings.region[i]) {
             return z
          }
@@ -60,16 +56,16 @@ function getCountry() {
 }
 
 function getQuestion() {
-   document.querySelector('.question .variants').innerHTML = ""
+   document.querySelector(' .variants').innerHTML = ""
    Game.question.answer = getCountry();
    Game.question.variants = [];
 
    document.getElementById('flag').src = Game.question.answer.flags.svg;
 
-   for (let i = 0; i < Game.variants.count - 1; i++) {
+   for (let i = 0; i < Game.settings.variants.count - 1; i++) {
       Game.question.variants.push(getCountry());
    }
-   Game.question.variants.splice(Math.round(Math.random(Game.variants.count)), 0, Game.question.answer);
+   Game.question.variants.splice(Math.round(Math.random(Game.question.variants.count + 1)), 0, Game.question.answer);
 
 
    for (let i = 0; i < Game.question.variants.length; i++) {
@@ -77,7 +73,7 @@ function getQuestion() {
       btn.onclick = nextQuestion;
       btn.className = 'answer';
       btn.dataset.name = Game.question.variants[i].name.common
-      btn.innerText = Game.variants.initials.standart[i] + " " + Game.question.variants[i].name.common
+      btn.innerText = Game.settings.variants.initials.standart[i] + " " + Game.question.variants[i].name.common
       document.querySelector('.variants').append(btn);
    }
 
@@ -88,7 +84,7 @@ function getQuestion() {
 
 
 
-function startGame(index = 0,) {
+function startGame() {
 
    let region = [];
    document.getElementsByName('region').forEach(r => {
@@ -102,22 +98,22 @@ function startGame(index = 0,) {
    }
    Game.settings.region = region;
 
-   document.querySelectorAll('.screen').forEach(s => {
-      s.style.display = "none"
-   })
+   document.querySelectorAll('.screen').forEach(s => { s.style.display = "none" })
+   document.querySelector('.question-screen').style.display = 'block';
    getQuestion();
-   document.querySelector('.screen-question').style.display = 'block';
 
 
 
-   if (Game.settings.mode[index].timeLimit > 0) {
-      Game.settings.timer = Game.settings.mode[index].timeLimit
+
+   if (selectedMode == 0) {
+      Game.settings.timer = document.querySelector("#range").value;
       Game.settings.timerId = setInterval(() => {
          if (Game.settings.timer > 0) {
             timerEl.innerText = Game.settings.timer + " seconds"
             Game.settings.timer--;
          } else {
             clearInterval(Game.settings.timerId);
+            finishGame();
          }
 
       }, 1000);
@@ -155,7 +151,7 @@ function nextQuestion() {
       if (this_.dataset.name == Game.question.answer.name.common) {
          this_.classList.add('bg-correct')
          Game.correctAnswer++;
-         correctAnswerEl.innerText = Game.correctAnswer + " correct";
+         scoreEl.innerText = Game.correctAnswer + " correct";
 
          let startPoint = 80
          let endPoint = 30
@@ -177,4 +173,21 @@ function nextQuestion() {
       setTimeout(() => { Game.freeze = false; getQuestion() }, 300)
    }
 
+}
+
+function finishGame() {
+   document.querySelectorAll('.screen').forEach(x => x.style.display = "none")
+   document.querySelector('.result-screen').style.display = "block";
+   document.querySelector('.result-screen .b').innerText = `You got ${Game.correctAnswer} correct answer `;
+   document.querySelector('.result-screen .bb').innerText = `You got ${Game.wrongAnswer} wrong answer `;
+   document.querySelector('.result-screen .bbb').innerText = `Accuracy Percentage ${Game.correctAnswer / (Game.correctAnswer + Game.wrongAnswer) * 100}% `;
+
+
+
+}
+
+
+function closeResult() {
+   document.querySelectorAll('.screen').forEach(x => x.style.display = "none")
+   document.querySelector('.start-screen').style.display = "block";
 }
