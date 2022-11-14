@@ -65,7 +65,7 @@ function getQuestion() {
    for (let i = 0; i < Game.settings.variants.count - 1; i++) {
       Game.question.variants.push(getCountry());
    }
-   Game.question.variants.splice(Math.round(Math.random(Game.question.variants.length + 1)), 0, Game.question.answer);
+   Game.question.variants.splice(Math.round(Math.random() * (Game.settings.variants.count + 1)), 0, Game.question.answer);
 
 
    for (let i = 0; i < Game.question.variants.length; i++) {
