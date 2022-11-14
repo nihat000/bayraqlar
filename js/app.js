@@ -62,7 +62,7 @@ function getQuestion() {
 
    document.getElementById('flag').src = Game.question.answer.flags.svg;
 
-   for (let i = 0; i < Game.settings.variants.count - 1; i++) {
+   for (let i = 0; i < Game.settings.variants.length - 1; i++) {
       Game.question.variants.push(getCountry());
    }
    Game.question.variants.splice(Math.round(Math.random(Game.question.variants.length + 1)), 0, Game.question.answer);
